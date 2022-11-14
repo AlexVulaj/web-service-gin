@@ -24,7 +24,9 @@ var albums = []album{
 
 func main() {
 	router := gin.Default()
-	//router.GET("/albums", getAlbums)
+	router.GET("/", func(context *gin.Context) {
+		context.IndentedJSON(http.StatusOK, "Hello")
+	})
 	router.GET("/albums", func(c *gin.Context) {
 		if c.Query("maxPrice") != "" {
 			getAlbumsMaxPrice(c)
@@ -35,7 +37,7 @@ func main() {
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
 
-	err := router.Run("localhost:8080")
+	err := router.Run(":8080")
 	if err != nil {
 		println("Unable to start router.")
 		return

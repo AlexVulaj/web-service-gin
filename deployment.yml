@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gin-app
+  name: gin-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gin-app
+  template:
+    metadata:
+      labels:
+        app: gin-app
+    spec:
+      containers:
+        - image: quay.io/avulaj/web-service-gin
+          imagePullPolicy: Always
+          name: gin-app
+          ports:
+            - containerPort: 8080
